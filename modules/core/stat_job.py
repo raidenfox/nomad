@@ -125,21 +125,30 @@ def locate_attribs(id_conn, id_job):
     
     return attribs
 
+# ritorna un dizionario
+def get_attribs(id_conn,id_job):
+    attr = {}
+    i = 0
+    job = pbs.pbs_statjob(id_conn, id_job, "NULL", "NULL")
+    while i < len(job[0].attribs):
+        attr[str(job[0].attribs[i].name)] = job[0].attribs[i].value
+        i = i + 1
+        
+    attr['lenght_resources'] = len(job[0].attribs)+1
+    return attr
+
 # Ritorna i nomi delle risorse i un processo, ma non i valori
 def define_attribs(id_conn, id_job):
-    code = []
     attribs = []
     jobs = pbs.pbs_statjob(id_conn, id_job, "NULL", "NULL")
-    i = 0
     index = len(jobs)
+    i = 0
     for job in jobs:
-        attrib = job.attribs
         y = 0
         while i < index:
-            lenght_a = len(attrib)
+            lenght_a = len(job.attribs)
             while y < lenght_a:
-                attribs.append(attrib[y].name)
-                code.append(y)
+                attribs.append(job.attribs[y].name)
                 y = y + 1
             
             i = i+1
