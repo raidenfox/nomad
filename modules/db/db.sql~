@@ -1,0 +1,112 @@
+-- phpMyAdmin SQL Dump
+-- version 3.4.9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generato il: Mar 01, 2012 alle 15:26
+-- Versione del server: 5.1.61
+-- Versione PHP: 5.3.3
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `nomad`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `appartiene`
+--
+
+DROP TABLE IF EXISTS `appartiene`;
+CREATE TABLE IF NOT EXISTS `appartiene` (
+  `job_id` varchar(40) NOT NULL,
+  `id_queue` int(11) NOT NULL,
+  PRIMARY KEY (`job_id`,`id_queue`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `bloccato`
+--
+
+DROP TABLE IF EXISTS `bloccato`;
+CREATE TABLE IF NOT EXISTS `bloccato` (
+  `job_id` varchar(40) NOT NULL,
+  `id_node` int(11) NOT NULL,
+  PRIMARY KEY (`job_id`,`id_node`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `coda`
+--
+
+DROP TABLE IF EXISTS `coda`;
+CREATE TABLE IF NOT EXISTS `coda` (
+  `id_queue` int(11) NOT NULL,
+  `name` int(11) NOT NULL,
+  `queue_time` int(11) NOT NULL,
+  PRIMARY KEY (`id_queue`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `job`
+--
+
+DROP TABLE IF EXISTS `job`;
+CREATE TABLE IF NOT EXISTS `job` (
+  `job_id` varchar(40) NOT NULL,
+  `job_name` varchar(40) NOT NULL,
+  `job_state` varchar(1) NOT NULL,
+  `session_id` int(11) NOT NULL,
+  `priority` int(11) NOT NULL,
+  `rerunability` tinyint(1) NOT NULL,
+  PRIMARY KEY (`job_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `sottomissione`
+--
+
+DROP TABLE IF EXISTS `sottomissione`;
+CREATE TABLE IF NOT EXISTS `sottomissione` (
+  `job_id` varchar(40) NOT NULL,
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`job_id`,`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL,
+  `job_owner` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `worker_node`
+--
+
+DROP TABLE IF EXISTS `worker_node`;
+CREATE TABLE IF NOT EXISTS `worker_node` (
+  `id_node` int(11) NOT NULL,
+  `node_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_node`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+

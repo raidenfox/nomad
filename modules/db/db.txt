@@ -1,0 +1,12 @@
+TRADUZIONE DELLE SINGOLE ENTITA'
+
+job(job_id,job_name,job_state,session_id,priority,rerunability)
+coda(id_queue,name,queue_time)
+worker_node(id_node,node_name)
+user(id,job_owner)
+
+TRADUZIONE DELLE RELAZIONI
+
+bloccato(job_id,id_node) *extern key verso job e worker node e primapry key job_id e id_node
+appartiene(job_id,id_queue) *extern key verso job e coda e primapry key job_id e id_queue
+sottomissione(job_id,id) *extern key verso job e user e primapry key job_id e id
